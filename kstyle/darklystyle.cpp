@@ -45,6 +45,7 @@
 #include <QDockWidget>
 #include <QFormLayout>
 #include <QGraphicsView>
+#include <QGraphicsWidget>
 #include <QGroupBox>
 #include <QItemDelegate>
 #include <QLabel>
@@ -4311,7 +4312,8 @@ bool Style::drawFrameFocusRectPrimitive(const QStyleOption *option, QPainter *pa
     const State &state(option->state);
 
     // no focus indicator on selected list items
-    if ((state & State_Selected) && qobject_cast<const QAbstractItemView *>(widget)) {
+    // and QGraphicsWidget (Dolphin)
+    if ((state & State_Selected) && (qobject_cast<const QAbstractItemView *>(widget) || qobject_cast<const QGraphicsWidget *>(option->styleObject))) {
         return true;
     }
 
